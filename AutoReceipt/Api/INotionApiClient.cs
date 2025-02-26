@@ -1,4 +1,4 @@
-﻿namespace AUtoReceipt.Api;
+﻿namespace AutoReceipt.Api;
 
 public interface INotionApiClient
 {

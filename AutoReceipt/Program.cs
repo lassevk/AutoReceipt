@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoReceipt.Api;
+
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-using AUtoReceipt.Api;
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddHttpClient();

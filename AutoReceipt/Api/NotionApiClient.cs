@@ -1,10 +1,11 @@
 ﻿using System.Net;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 using Microsoft.Extensions.Options;
 
-namespace AUtoReceipt.Api;
+namespace AutoReceipt.Api;
 
 public class NotionApiClient : INotionApiClient
 {
@@ -51,7 +52,13 @@ public class NotionApiClient : INotionApiClient
     {
         var request = new HttpRequestMessage(HttpMethod.Get, path);
         HttpResponseMessage response = await SendAsync(request, cancellationToken);
-        NotionPaginatedList<T>? results = JsonSerializer.Deserialize<NotionPaginatedList<T>>(await response.Content.ReadAsStringAsync(cancellationToken));
+        string json = await response.Content.ReadAsStringAsync(cancellationToken);
+
+        await File.WriteAllTextAsync(@"D:\Temp\response.json", JsonSerializer.Serialize(JsonSerializer.Deserialize<JsonElement>(json), new JsonSerializerOptions
+        {
+            WriteIndented = true
+        }), Encoding.UTF8, cancellationToken);
+        NotionPaginatedList<T>? results = JsonSerializer.Deserialize<NotionPaginatedList<T>>(json);
         if (results == null)
         {
             return [];

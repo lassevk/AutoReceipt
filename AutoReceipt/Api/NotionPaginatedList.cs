@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace AUtoReceipt.Api;
+namespace AutoReceipt.Api;
 
 [JsonObjectCreationHandling(JsonObjectCreationHandling.Populate)]
 public class NotionPaginatedList<T> : NotionObject
