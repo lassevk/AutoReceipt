@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 using Microsoft.Extensions.Options;
 
-namespace NotionAutomation.Api;
+namespace AUtoReceipt.Api;
 
 public class NotionApiClient : INotionApiClient
 {

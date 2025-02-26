@@ -1,4 +1,4 @@
-﻿namespace NotionAutomation.Api;
+﻿namespace AUtoReceipt.Api;
 
 public interface INotionApiClient
 {

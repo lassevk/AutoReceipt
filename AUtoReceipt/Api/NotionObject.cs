@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace NotionAutomation.Api;
+namespace AUtoReceipt.Api;
 
 public abstract class NotionObject
 {
