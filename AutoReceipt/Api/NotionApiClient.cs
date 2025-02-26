@@ -14,6 +14,12 @@ public class NotionApiClient : INotionApiClient
 
     private readonly HttpClient _client;
     private readonly Queue<DateTimeOffset> _rateLimitQueue = new();
+    private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+    {
+        AllowOutOfOrderMetadataProperties = true,
+        WriteIndented = true,
+        PreferredObjectCreationHandling = JsonObjectCreationHandling.Populate,
+    };
 
     public NotionApiClient(HttpClient client, IOptions<NotionApiOptions> options)
     {
@@ -48,7 +54,7 @@ public class NotionApiClient : INotionApiClient
     }
 
     private async Task<List<T>> GetListAsync<T>(string path, CancellationToken cancellationToken)
-        where T : NotionObject
+        where T : NotionBase
     {
         var request = new HttpRequestMessage(HttpMethod.Get, path);
         HttpResponseMessage response = await SendAsync(request, cancellationToken);
@@ -58,7 +64,8 @@ public class NotionApiClient : INotionApiClient
         {
             WriteIndented = true
         }), Encoding.UTF8, cancellationToken);
-        NotionPaginatedList<T>? results = JsonSerializer.Deserialize<NotionPaginatedList<T>>(json);
+
+        NotionPaginatedList<T>? results = JsonSerializer.Deserialize<NotionPaginatedList<T>>(json, _jsonSerializerOptions);
         if (results == null)
         {
             return [];
@@ -97,45 +104,4 @@ public class NotionApiClient : INotionApiClient
 
         _rateLimitQueue.Enqueue(DateTimeOffset.UtcNow);
     }
-}
-
-public class NotionApiOptions
-{
-    public required string Secret { get; set; }
-}
-
-[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
-[JsonDerivedType(typeof(NotionParagraphBlock), "paragraph")]
-public abstract class NotionBlock : NotionObject
-{
-    [JsonPropertyName("object")]
-    public required string Object { get; set; }
-
-    [JsonPropertyName("id")]
-    public required string Id { get; set; }
-
-    [JsonPropertyName("parent")]
-    public NotionBlockParent? Parent { get; set; }
-
-    [JsonPropertyName("created_time")]
-    public required DateTimeOffset CreatedTime { get; set; }
-
-    [JsonPropertyName("last_edited_time")]
-    public required DateTimeOffset LastEditTime { get; set; }
-}
-
-public class NotionParagraphBlock : NotionBlock
-{
-}
-
-[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
-[JsonDerivedType(typeof(NotionBlockParentPage), "page_id")]
-public abstract class NotionBlockParent : NotionObject
-{
-}
-
-public class NotionBlockParentPage : NotionBlockParent
-{
-    [JsonPropertyName("page_id")]
-    public required string PageId { get; set; }
 }

@@ -21,6 +21,60 @@
       <Compile Update="Api\NotionApiClient.cs">
         <DependentUpon>INotionApiClient.cs</DependentUpon>
       </Compile>
+      <Compile Update="Api\NotionBlockParentBlock.cs">
+        <DependentUpon>NotionBlockParent.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionBlockParentDatabase.cs">
+        <DependentUpon>NotionBlockParent.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionBlockParentPage.cs">
+        <DependentUpon>NotionBlockParent.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionBlockParentWorkspace.cs">
+        <DependentUpon>NotionBlockParent.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionBlock.cs">
+        <DependentUpon>NotionObject.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionParagraph.cs">
+        <DependentUpon>NotionBase.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionParagraphBlock.cs">
+        <DependentUpon>NotionBlock.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionObject.cs">
+        <DependentUpon>NotionBase.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionPaginatedList.cs">
+        <DependentUpon>NotionBase.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionMention.cs">
+        <DependentUpon>NotionBase.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionEquation.cs">
+        <DependentUpon>NotionBase.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionRichText.cs">
+        <DependentUpon>NotionBase.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionRichTextEquation.cs">
+        <DependentUpon>NotionRichText.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionRichTextMention.cs">
+        <DependentUpon>NotionRichText.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionRichTextText.cs">
+        <DependentUpon>NotionRichText.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionText.cs">
+        <DependentUpon>NotionBase.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionTextLink.cs">
+        <DependentUpon>NotionBase.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\NotionFileBlock.cs">
+        <DependentUpon>NotionBlock.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

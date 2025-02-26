@@ -1,10 +1,9 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace AutoReceipt.Api;
 
-public abstract class NotionObject
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "object")]
+[JsonDerivedType(typeof(NotionObject), "block")]
+public abstract class NotionObject : NotionBase
 {
-    [JsonExtensionData]
-    public Dictionary<string, JsonElement>? AdditionalData { get; set; }
 }

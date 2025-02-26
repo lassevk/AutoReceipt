@@ -3,8 +3,8 @@
 namespace AutoReceipt.Api;
 
 [JsonObjectCreationHandling(JsonObjectCreationHandling.Populate)]
-public class NotionPaginatedList<T> : NotionObject
-    where T : NotionObject
+public class NotionPaginatedList<T> : NotionBase
+    where T : NotionBase
 {
     [JsonPropertyName("object")]
     public required string Object { get; set; }
